@@ -1,3 +1,24 @@
+
+function set_system(sname: number) {
+    if (sname == 0) {
+        init_strip(0,2,0) //standard, 8x8,pin1 
+        basic.showString("S")
+    }
+
+    if (sname == 1) { //wolf
+        init_strip(0,1,0) //links, 7x5,pin0
+        init_strip(1,1,1) //rechts, 7x5,pin1  
+        basic.showString("M")
+    }
+    if (sname == 2) { //baatest
+        init_strip(0,2,0) //standard, 8x8,pin0 
+        init_strip(1,2,1) //standard, 8x8,pin1 
+        init_strip(2,1,2) //standard, 5x7,pin2 
+        basic.showString("B")
+    }
+
+}
+
 function get_bst_matrix(zch: string = "A") {
     let found = bst_reihe.indexOf(zch)
     if (found==-1) {
@@ -194,15 +215,14 @@ function default_strip_data() {
     // for (let s=0;s<neo_strip_anzahl;s++) {
     //     arr_neop_settings.push({ pin: arr_tech_pin[s], hwMatrix: arr_tech_matrix[s] })
     // }    
+    //nicht ändern, sonst geht das nicht mehr
     arr_neop_settings.push({ pin: arr_tech_pin[0], hwMatrix: arr_tech_matrix[2] })
     arr_neop_settings.push({ pin: arr_tech_pin[1], hwMatrix: arr_tech_matrix[2] })
     arr_neop_settings.push({ pin: arr_tech_pin[2], hwMatrix: arr_tech_matrix[1] })
 }
 
 function init_strip(nrMatrix: number, hwMatrix: number, pin: number) {
-    console.log("matrisxnr"+nrMatrix)
     arr_neop_settings[nrMatrix].pin = pin;
-    console.log("x matrisxnr"+nrMatrix)
     arr_neop_settings[nrMatrix].hwMatrix = arr_tech_matrix[hwMatrix];
     let pixelAnzahl = arr_tech_matrix[hwMatrix][0] * arr_tech_matrix[hwMatrix][1]
     let strip = neopixel.create(arr_tech_pin[pin], pixelAnzahl, NeoPixelMode.RGB)
@@ -221,27 +241,13 @@ function set_helligkeit(helligkeit: number, zch_pause: number) {
         neop_ges[i].setBrightness(strip_helligkeit);
     }
 }
-
-function set_system(sname: number) {
-    console.log("sname " + sname)
-    if (sname == 0) {
-        init_strip(0,2,1) //standard, 8x8,pin1 
-        basic.showString("S")
-    }
-
-    if (sname == 1) { //wolf
-        init_strip(0,1,0) //links, 7x5,pin0
-        init_strip(1,1,1) //rechts, 7x5,pin1  
-        basic.showString("M")
-    }
-    if (sname == 2) { //baatest
-        init_strip(0,2,0) //standard, 8x8,pin0 
-        init_strip(1,2,1) //standard, 8x8,pin1 
-        init_strip(2,1,2) //standard, 5x7,pin2 
-        basic.showString("B")
-    }
-
+function testen() {
+    // showtext (0,"1",neopixel.colors(NeoPixelColors.Red),true)
+    // showtext (1,"2",neopixel.colors(NeoPixelColors.Red),true)
+    // showtext (2,"3",neopixel.colors(NeoPixelColors.Red),true)
 }
+
+
 
 // variable ########################################
 interface neop {
@@ -255,7 +261,7 @@ let arr_tech_pin = [DigitalPin.P0, DigitalPin.P1, DigitalPin.P2, DigitalPin.P3, 
 // hardwareeinstellungen end ###########################
 
 let zeichen_matrix: Array<number> = []
-let neo_strip_anzahl: number = 3;
+let neo_strip_anzahl: number = 1;
 let shift: number = 0
 let strip_helligkeit: number = 80;
 let pause_bst: number = 2000; //auch scrollspeed
@@ -276,6 +282,6 @@ let bst_reihe: string = "";
 //beginn initialisierung ############################
 init_alphabet();
 default_strip_data();
-set_system(0);
-basic.showIcon(IconNames.Yes)
+set_system(1);
+
 // ende Initialisierung

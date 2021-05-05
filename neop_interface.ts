@@ -20,10 +20,8 @@ enum nrMatrix {
     //% block="2"
     links,
     //% block="3"
-    rechts,
-    //% block="4"
-    extend
-}
+    rechts
+   }
 
 enum HWMatrix {
     //% block="5x5"
@@ -45,7 +43,6 @@ namespace DLPLmatrix {
      * Standardmäßig ist ein Gesamtsystem mit 8x8 auf Pin 1 vordefiniert und benutzbar (Name: Haupt)
      * Es können aber auch weitere Systeme definiert verwendet werden (Namen: links und rechts)
     */
-
 
     //% group="Technische Definition"
     //% pin.defl=1    
@@ -100,4 +97,6 @@ namespace DLPLmatrix {
     export function definitionSystem(sname:sName) {
         set_system(sname)
     }
+
+
 }
